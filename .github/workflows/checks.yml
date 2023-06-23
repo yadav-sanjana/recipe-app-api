@@ -19,6 +19,13 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Set Environment Variables
+        run: |
+          echo "::set-env name=isPost::$(grep -E '^isPost=' .env | cut -d '=' -f2-)"
+          echo "::set-env name=registry::$(grep -E '^registry=' .env | cut -d '=' -f2-)"
+          echo "::set-env name=logout::$(grep -E '^logout=' .env | cut -d '=' -f2-)"
+          echo "Environment variables set."
+
       - name: Run Tests
         run: |
           docker-compose run --rm app sh -c "python manage.py test"

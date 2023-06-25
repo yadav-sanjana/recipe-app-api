@@ -31,7 +31,7 @@ class ModelTests(TestCase):
 
         for emails, expected in sample_emails:
             user = get_user_model().objects.create_user(  # type: ignore
-                emails, 'sample123') 
+                emails, 'sample123')
             self.assertEqual(user.email, expected)
 
     def test_new_user_email_req_validation(self):
@@ -39,7 +39,7 @@ class ModelTests(TestCase):
         with self.assertRaises(ValueError):
             get_user_model().objects.create_user(  # type: ignore
                 '', 'sample123')
-            
+
     def test_create_superuser(self):
         "create superuser"
         user = get_user_model().objects.create_superuser(  # type: ignore

@@ -418,7 +418,7 @@ class PrivateRecipeAPITests(TestCase):
         r2.ingredients.add(ingredient2)
         r3 = create_recipe(user=self.user, title="Rajasthani curry")
 
-        params = {'ingredients': f'{ingredient1.id}, {ingredient1.id}'}
+        params = {'ingredients': f'{ingredient1.id}, {ingredient2.id}'}
         res = self.client.get(RECIPES_URL, params)
 
         s1 = RecipeSerializer(r1)

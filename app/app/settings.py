@@ -4,12 +4,17 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-g8ugk+w@sx(+l&o&m#-o954&xh66&2qvbr3t9i4f$y-3%$21l4'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'root')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(int(os.environ.get('DEBUG', 0)))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS.extend(
+    filter(
+        None,
+        os.environ.get('ALLOWED_HOSTS', '').split(','),
+    )
+)
 
 
 # Application definition
